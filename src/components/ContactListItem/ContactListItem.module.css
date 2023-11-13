@@ -1,0 +1,19 @@
+.listItemText {
+  font-size: 18px;
+  font-weight: 400;
+  margin-right: 15px;
+}
+
+.listItem {
+  margin-bottom: 10px;
+}
+
+.deleteBtn {
+  border-radius: 5px;
+  border: 1px solid grey;
+  padding: 1px 6px;
+}
+
+.deleteBtn:hover {
+  background-color: rgb(14, 179, 179);
+}
