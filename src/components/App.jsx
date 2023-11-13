@@ -41,7 +41,40 @@ export class App extends Component {
     );
     contacts.splice(indexToDelete, 1);
     this.setState({ contacts: contacts });
+
+    try {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      const contactsFromStorage = JSON.parse(localStorage.getItem('contacts'));
+      if (contactsFromStorage.length === 0) {
+        localStorage.removeItem('contacts');
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
+
+  componentDidMount() {
+    try {
+      const storedContacts = localStorage.getItem('contacts');
+      if (storedContacts) {
+        this.setState({
+          contacts: JSON.parse(storedContacts),
+        });
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      try {
+        localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }
 
   render() {
     const { contacts, filter } = this.state;
